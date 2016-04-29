@@ -1,0 +1,36 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add/Edit Comments</h1>
+    <div class="button button-clear" ng-click="entryHallway.commentsModal.hide()"><span class="icon ion-close"></span></div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list card">
+      <div class="item item-divider">Add Comment</div>
+        <div class="item item-body">
+          <form ng-submit="entryHallway.createComment()">
+            <div class="list">
+              <label class="item item-input">
+                <input type="text" placeholder="Comment on this item" ng-model="entryHallway.newComments[entryHallway.modalSection].text">
+              </label>
+            </div>
+            <div class="padding">
+              <button type="submit" class="button button-block button-positive">Add</button>
+            </div>
+          </form>
+        </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">Edit Comments</div>
+        <div class="item item-body">
+          <ion-list show-delete="true">
+            <ion-item ng-repeat="comment in entryHallway.comments[entryHallway.modalSection] track by comment.id">
+              <p ng-bind="comment.text"></p>
+              <ion-delete-button class="ion-trash-a"
+                       ng-click="entryHallway.deleteComment(comment.id)">
+              </ion-delete-button>
+            </ion-item>
+          </ion-list>
+        </div>
+    </div>
+  </ion-content>
+</ion-modal-view>
