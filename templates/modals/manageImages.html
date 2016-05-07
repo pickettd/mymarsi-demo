@@ -1,0 +1,40 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add/Edit Pictures</h1>
+    <div class="button button-clear" ng-click="entryHallway.imagesModal.hide()"><span class="icon ion-close"></span></div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list card">
+      <div class="item item-divider">Add Picture</div>
+        <div class="item item-body">
+          <form ng-submit="entryHallway.addNewImage()">
+            <div class="list">
+              <label class="item item-input">
+                <input type="file" accept="image/*" onchange="angular.element(this).scope().entryHallway.fileNameChanged(this)">
+              </label>
+              <img ng-if="entryHallway.newImages[entryHallway.modalSection].src"
+                   ng-src="{{entryHallway.newImages[entryHallway.modalSection].src}}"
+                   style="width: 100%; height: auto;">
+            </div>
+            <div class="padding">
+              <button type="submit" class="button button-block button-positive">Add</button>
+            </div>
+          </form>
+        </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">Edit Pictures</div>
+        <div class="item item-body">
+          <ion-list show-delete="true">
+            <ion-item ng-repeat="image in entryHallway.images[entryHallway.modalSection] track by image.id">
+              <img ng-src="{{image.src}}"
+                   style="width: 50%; height: auto;">
+              <ion-delete-button class="ion-trash-a"
+                       ng-click="entryHallway.deleteImage(image.id)">
+              </ion-delete-button>
+            </ion-item>
+          </ion-list>
+        </div>
+    </div>
+  </ion-content>
+</ion-modal-view>
