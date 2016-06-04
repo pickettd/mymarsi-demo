@@ -1,0 +1,84 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add/Edit Videos</h1>
+    <div class="button button-clear" ng-click="entryHallway.videosModal.hide()"><span class="icon ion-close"></span></div>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list card">
+      <div class="item item-divider">Add Video</div>
+        <div class="item item-body">
+          <form ng-submit="entryHallway.addNewVideo()">
+            <div class="list">
+              <label class="item item-input">
+                <input type="file" accept="video/*" onchange="angular.element(this).scope().entryHallway.videoFileNameChanged(this)">
+              </label>
+              <videogular ng-if="entryHallway.newVideos[entryHallway.modalSection].array"
+                          vg-theme="entryHallway.videoConfig.theme"
+                          vg-error="entryHallway.videoError"
+                          vg-plays-inline="true"
+                          style="width: 40%; height: auto;">
+                <vg-media vg-src="entryHallway.newVideos[entryHallway.modalSection].array"
+                          vg-tracks="entryHallway.videoConfig.tracks">
+                </vg-media>
+                <vg-controls>
+                  <vg-play-pause-button></vg-play-pause-button>
+                  <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+                  <vg-scrub-bar>
+                      <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                  </vg-scrub-bar>
+                  <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+                  <vg-volume>
+                      <vg-mute-button></vg-mute-button>
+                      <vg-volume-bar></vg-volume-bar>
+                  </vg-volume>
+                  <vg-fullscreen-button></vg-fullscreen-button>
+                </vg-controls>
+                <vg-overlay-play></vg-overlay-play>
+              </videogular>
+            </div>
+            <div class="padding">
+              <button type="submit" class="button button-block button-positive">Add</button>
+            </div>
+          </form>
+        </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">
+        Edit Videos
+        <button class="pull-right"
+                ng-click="entryHallway.sections[entryHallway.modalSection].showDelete = !entryHallway.sections[entryHallway.modalSection].showDelete">
+          <span class="icon ion-trash-a"></span>
+        </button>
+      </div>
+        <div class="item item-body">
+          <ion-list show-delete="entryHallway.sections[entryHallway.modalSection].showDelete">
+            <ion-item ng-repeat="videoArray in entryHallway.sections[entryHallway.modalSection].videos"
+                      style="width: 50%; height: auto;">
+              <videogular vg-theme="entryHallway.videoConfig.theme" vg-error="entryHallway.videoError" vg-plays-inline="true">
+                <vg-media vg-src="videoArray.array"
+                          vg-tracks="entryHallway.videoConfig.tracks">
+                </vg-media>
+                <vg-controls>
+                  <vg-play-pause-button></vg-play-pause-button>
+                  <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+                  <vg-scrub-bar>
+                      <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                  </vg-scrub-bar>
+                  <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+                  <vg-volume>
+                      <vg-mute-button></vg-mute-button>
+                      <vg-volume-bar></vg-volume-bar>
+                  </vg-volume>
+                  <vg-fullscreen-button></vg-fullscreen-button>
+                </vg-controls>
+                <vg-overlay-play></vg-overlay-play>
+              </videogular>
+              <ion-delete-button class="ion-trash-a"
+                                 ng-click="entryHallway.deleteVideo(videoArray._id)">
+              </ion-delete-button>
+            </ion-item>
+          </ion-list>
+        </div>
+    </div>
+  </ion-content>
+</ion-modal-view>
