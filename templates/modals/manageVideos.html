@@ -10,7 +10,7 @@
           <form ng-submit="entryHallway.addNewVideo()">
             <div class="list">
               <label class="item item-input">
-                <input type="file" accept="video/*" onchange="angular.element(this).scope().entryHallway.videoFileNameChanged(this)">
+                <input type="file" accept="video/mp4,video/ogg,video/webm" onchange="angular.element(this).scope().entryHallway.videoFileNameChanged(this)">
               </label>
               <videogular ng-if="entryHallway.newVideos[entryHallway.modalSection].array"
                           vg-theme="entryHallway.videoConfig.theme"
