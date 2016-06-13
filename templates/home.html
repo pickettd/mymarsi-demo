@@ -1,5 +1,46 @@
 <ion-view title="Home" id="page13">
-    <ion-content padding="true" class="has-header">
-        <a ui-sref="tabsController.entryHallway" id="home-button5" class="button button-positive  button-block">Demo inspection</a>
-    </ion-content>
+  <ion-content padding="true" class="has-header">
+    <div class="list">
+      <div class="item">
+        <div class="list">
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Property
+            </div>
+            <select ng-options="property as property.name for property in home.properties track by property._id" ng-model="home.selectedProperty">
+            </select>
+          </label>
+        </div>
+        <div ng-if="home.selectedProperty">
+          <a ui-sref="tabsController.entryHallway"
+             id="home-button5"
+             class="button button-positive button-block"
+             disabled>New Inspection for <span ng-bind="home.selectedProperty.name"></span></a>
+        </div>
+      </div>
+      <div class="item item-divider"
+           ng-if="home.selectedProperty">
+        ...or continue an existing inspection
+      </div>
+      <div ng-if="home.selectedProperty"
+           class="item">
+        <div ng-if="home.selectedProperty.data"
+             class="list">
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Inspection
+            </div>
+            <select ng-options="inspection as inspection.name for inspection in home.selectedProperty.data track by inspection._id" ng-model="home.selectedInspection">
+            </select>
+          </label>
+        </div>
+        <div ng-if="home.selectedInspection">
+          <a ui-sref="tabsController.entryHallway({inspectionID: home.selectedInspection._id, propertyID: home.selectedProperty._id})"
+             ui-sref-opts="{reload: true}"
+             id="home-button5"
+             class="button button-positive button-block">Continue <span ng-bind="home.selectedInspection.name"></span></a>
+        </div>
+      </div>
+    </div>
+  </ion-content>
 </ion-view>
