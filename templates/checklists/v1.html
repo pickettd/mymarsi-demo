@@ -1,0 +1,73 @@
+<div ng-repeat="section in entryHallway.sections"
+     ng-if="section._id"
+     class="list card">
+  <div class="item item-divider">
+    <span ng-bind="section.tradeOrService.name"></span>
+  </div>
+  <div ng-if="section.instructions"
+       id="entryHallway-markdown4"
+       style="color:#000000;"
+       class="item">
+    <ul>
+      <li ng-repeat="instruction in section.instructions">
+        <span ng-bind="instruction.text"></span>
+      </li>
+    </ul>
+  </div>
+<!--
+  <div class="item range range-positive">
+    <i class="icon ion-ios-sunny-outline"></i>
+    <input type="range" name="volume" min="0" max="10" value="5">
+    <i class="icon ion-ios-sunny"></i>
+  </div>
+-->
+  <div ng-if="section.materialChoices"
+       class="item">
+    <form class="list">
+      <ion-checkbox ng-repeat="choice in section.materialChoices"
+                    ng-if="choice.name"
+                    ng-model="choice.status">
+        <span ng-bind="choice.name"></span>
+      </ion-checkbox>
+    </form>
+  </div>
+  <div ng-if="section.reportConditionChoices"
+       class="item">
+    <form class="list">
+      <ion-checkbox ng-repeat="choice in section.reportConditionChoices"
+                    ng-if="choice.name"
+                    ng-model="choice.status">
+        <span ng-bind="choice.name"></span>
+      </ion-checkbox>
+    </form>
+  </div>
+  <div class="item">
+    <div class="list card">
+      <div class="item item-divider">Work Tracking</div>
+      <div class="item item-body">
+        <div ng-if="section.inspectionWorkTrackingConditions"
+             class="button-bar">
+          <button ng-repeat="trackingCondition in section.inspectionWorkTrackingConditions"
+                  ng-if="trackingCondition.name"
+                  class="button button-stable button-block button-outline"
+                  ng-class="{active: section.inspectionWorkTrackingConditions.selection == trackingCondition._id}"
+                  ng-click="section.inspectionWorkTrackingConditions.selection = trackingCondition._id">
+            <span ng-bind="trackingCondition.name"></span>
+          </button>
+        </div>
+        <form class="list">
+          <ion-checkbox ng-model="section.workCompletedSinceLastInspection">
+            Work completed since last inspection
+          </ion-checkbox>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <div class="button-bar">
+      <button id="entryHallway-button12" class="button button-positive  button-block" ng-click="entryHallway.openCommentsModal(section._id)">Add/edit comments</button>
+      <button id="entryHallway-button13" class="button button-positive  button-block" ng-click="entryHallway.openVideosModal(section._id)">Add/edit videos</button>
+      <button id="entryHallway-button14" class="button button-positive  button-block" ng-click="entryHallway.openImagesModal(section._id)">Add/edit pictures</button>
+    </div>
+  </div>
+</div>

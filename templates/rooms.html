@@ -1,0 +1,5 @@
+<ion-view title="{{rooms[rooms.selectedRoomID].displayTitle}}" id="page3">
+    <ion-content padding="true" class="has-header">
+        <div ng-include="'templates/checklists/'+rooms[rooms.selectedRoomID].checklistVersion+'.html'"></div>
+    </ion-content>
+</ion-view>
