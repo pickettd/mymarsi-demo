@@ -1,1 +1,1 @@
-angular.module("app.directives",[]).directive("blankDirective",[function(){}]);
+angular.module("app.directives",[]).directive("blankDirective",[function(){}]).directive("customOnChange",function(){return{restrict:"A",link:function(n,e,i){var t=n.$eval(i.customOnChange);e.bind("change",t)}}});

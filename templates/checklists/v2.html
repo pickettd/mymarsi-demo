@@ -75,9 +75,21 @@
   </div>
   <div class="item">
     <div class="button-bar">
-      <button id="entryHallway-button12" class="button button-positive  button-block" ng-click="entryHallway.openCommentsModal(section._id)">Add/edit comments</button>
-      <button id="entryHallway-button13" class="button button-positive  button-block" ng-click="entryHallway.openVideosModal(section._id)">Add/edit videos</button>
-      <button id="entryHallway-button14" class="button button-positive  button-block" ng-click="entryHallway.openImagesModal(section._id)">Add/edit pictures</button>
+      <button id="entryHallway-button12"
+              class="button button-positive  button-block"
+              ng-click="rooms[rooms.selectedRoomID].openCommentsModal(section._id)">
+        Add/edit comments
+      </button>
+      <button id="entryHallway-button13"
+              class="button button-positive  button-block"
+              ng-click="rooms[rooms.selectedRoomID].openVideosModal(section._id)">
+        Add/edit videos
+      </button>
+      <button id="entryHallway-button14"
+              class="button button-positive  button-block"
+              ng-click="rooms[rooms.selectedRoomID].openImagesModal(section._id)">
+        Add/edit pictures
+      </button>
     </div>
   </div>
 </div>
