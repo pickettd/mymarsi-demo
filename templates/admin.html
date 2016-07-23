@@ -1,3 +1,54 @@
 <ion-view title="Admin" id="page14">
-    <ion-content padding="true" class="has-header"></ion-content>
+  <ion-content padding="true" class="has-header">
+    <div class="list">
+      <div class="item">
+        <div class="list">
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Unit/Property
+            </div>
+            <select ng-options="unit as unit.name for unit in admin.units track by unit._id"
+                    ng-model="admin.selectedUnit"
+                    ng-change="admin.getInspectionStubs(admin.selectedUnit._id)">
+            </select>
+          </label>
+        </div>
+      </div>
+      <div ng-if="admin.selectedUnit"
+           class="item">
+        <div ng-if="admin.inspectionStubs"
+             class="list">
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Inspection
+            </div>
+            <select ng-options="inspection as inspection.name for inspection in admin.inspectionStubs track by inspection._id"
+                    ng-model="admin.selectedInspection"
+                    ng-change="admin.getVisitStubs(admin.selectedInspection._id)">
+            </select>
+          </label>
+        </div>
+      </div>
+      <div ng-if="admin.selectedInspection"
+           class="item">
+        <div ng-if="admin.visitStubs"
+             class="list">
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Visit
+            </div>
+            <select ng-options="visit as visit.name for visit in admin.visitStubs track by visit._id"
+                    ng-model="admin.selectedVisit"
+                    ng-change="admin.getVisitData(admin.selectedVisit._id)">
+            </select>
+          </label>
+        </div>
+      </div>
+      <div ng-if="admin.selectedVisit"
+           class="item">
+        <pre ng-bind="admin.visitData">
+        </pre>
+      </div>
+    </div>
+  </ion-content>
 </ion-view>

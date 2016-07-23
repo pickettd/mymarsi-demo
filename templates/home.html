@@ -5,42 +5,45 @@
         <div class="list">
           <label class="item item-input item-select">
             <div class="input-label">
-              Property
+              Unit/Property
             </div>
-            <select ng-options="property as property.name for property in home.properties track by property._id" ng-model="home.selectedProperty">
+            <select ng-options="property as property.name for property in home.properties track by property._id"
+                    ng-model="home.selectedProperty"
+                    ng-change="home.getInspectionStubs(home.selectedProperty._id)">
             </select>
           </label>
-        </div>
-        <div ng-if="home.selectedProperty">
-          <a ng-click="home.addNewInspection()"
-             id="home-button5"
-             class="button button-positive button-block"
-             disabled>
-             New Inspection for <span ng-bind="home.selectedProperty.name"></span>
-          </a>
         </div>
       </div>
       <div class="item item-divider"
            ng-if="home.selectedProperty">
-        ...or continue an existing inspection
+        ...work on the following inspection:
       </div>
       <div ng-if="home.selectedProperty"
            class="item">
-        <div ng-if="home.selectedProperty.data"
+        <div ng-if="home.inspectionStubs"
              class="list">
           <label class="item item-input item-select">
             <div class="input-label">
               Inspection
             </div>
-            <select ng-options="inspection as inspection.name for inspection in home.selectedProperty.data track by inspection._id" ng-model="home.selectedInspection">
+            <select ng-options="inspection as inspection.name for inspection in home.inspectionStubs track by inspection._id" ng-model="home.selectedInspection">
             </select>
           </label>
         </div>
         <div ng-if="home.selectedInspection">
+          <a ng-click="home.createNewVisit(home.selectedProperty.name, home.selectedInspection)"
+             ui-sref="tabsController.general({inspectionID: home.selectedInspection._id, propertyID: home.selectedProperty._id})"
+             ui-sref-opts="{reload: true}"
+             id="home-button5"
+             class="button button-balanced button-block">Continue <span ng-bind="home.selectedInspection.name"></span> with a new visit</a>
+        </div>
+        <div ng-if="(home.selectedVisit.inspectionID)&&(home.selectedInspection._id === home.selectedVisit.inspectionID)">
           <a ui-sref="tabsController.general({inspectionID: home.selectedInspection._id, propertyID: home.selectedProperty._id})"
              ui-sref-opts="{reload: true}"
              id="home-button5"
-             class="button button-positive button-block">Continue <span ng-bind="home.selectedInspection.name"></span></a>
+             class="button button-positive button-block">Resume
+            <span ng-bind="home.selectedVisit.name"></span>
+          </a>
         </div>
       </div>
     </div>

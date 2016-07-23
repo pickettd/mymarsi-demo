@@ -1,0 +1,7 @@
+<form class="list">
+  <ion-checkbox ng-repeat="choice in section.conditionDefaultsClinical track by choice._id"
+                ng-if="choice.name"
+                ng-model="choice.status">
+    <span ng-bind="choice.name"></span>
+  </ion-checkbox>
+</form>

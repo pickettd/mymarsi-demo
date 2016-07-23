@@ -17,22 +17,33 @@
            id="entryHallway-markdown4"
            style="color:#000000;"
            class="item">
-        <div class="list card">
-          <div class="item item-divider">TIPS and Check For</div>
-          <div class="item item-body">
+        <div class="list card no-margin">
+          <div class="item item-divider"
+               ng-click="rooms[rooms.selectedRoomID].showTips[section._id] = !rooms[rooms.selectedRoomID].showTips[section._id]">
+            <button>
+              <i class="icon"
+                 ng-class="!rooms[rooms.selectedRoomID].showTips[section._id] ? 'ion-plus' : 'ion-minus'">
+              </i>
+            </button>
+            TIPS and Check For
+          </div>
+          <div ng-if="rooms[rooms.selectedRoomID].showTips[section._id]"
+               class="item item-body">
             <p>
               <span ng-bind="section['TIPS and Check For']"></span>
             </p>
           </div>
         </div>
       </div>
-    <!--
-      <div class="item range range-positive">
-        <i class="icon ion-ios-sunny-outline"></i>
-        <input type="range" name="volume" min="0" max="10" value="5">
-        <i class="icon ion-ios-sunny"></i>
+      <div class="item">
+        Hospitality rating (1-10): {{section.hospitalityRating}}
+        <div class="range range-positive">
+          <i class="icon ion-ios-sunny-outline"></i>
+          <input type="range" min="0" max="10" step="1" value="5"
+                 ng-model="section.hospitalityRating" />
+          <i class="icon ion-ios-sunny"></i>
+        </div>
       </div>
-    -->
       <div ng-if="section.materialChoices"
            class="item">
         <form class="list">
@@ -53,13 +64,17 @@
           </ion-checkbox>
         </form>
       </div>
+      <div ng-if="section.sizeOptions"
+           class="item">
+        <div ng-include="'templates/checklists/typeConditions/sizeOptions.html'"></div>
+      </div>
       <div class="item">
         <div class="list card">
           <div class="item item-divider">Work Tracking</div>
           <div class="item item-body">
             <div ng-if="section.inspectionWorkTrackingConditions"
                  class="button-bar">
-              <button ng-repeat="trackingCondition in section.inspectionWorkTrackingConditions"
+              <button ng-repeat="trackingCondition in rooms.inspectionWorkTrackingConditions"
                       ng-if="trackingCondition.name"
                       class="button button-stable button-block button-outline"
                       ng-class="{active: section.inspectionWorkTrackingConditions.selection == trackingCondition._id}"
