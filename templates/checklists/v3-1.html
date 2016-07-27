@@ -1,0 +1,93 @@
+<div ng-repeat="section in rooms[rooms.selectedRoomID].sections"
+     ng-if="section._id"
+     class="list card">
+    <div class="item item-divider"
+         ng-click="rooms[rooms.selectedRoomID][section._id] = !rooms[rooms.selectedRoomID][section._id]">
+      <button><i class="icon"
+         ng-class="!rooms[rooms.selectedRoomID][section._id] ? 'ion-minus' : 'ion-plus'">
+      </i></button>
+      <span ng-bind="section['Trade or Service']"></span>
+      <span> - </span>
+      <span ng-bind="section['Type']"></span>
+      <span> - </span>
+      <span ng-bind="section['Item']"></span>
+    </div>
+    <div ng-if="!rooms[rooms.selectedRoomID][section._id]">
+      <div ng-if="section['TIPS']"
+           id="entryHallway-markdown4"
+           style="color:#000000;"
+           class="item">
+        <div class="list card no-margin">
+          <div class="item item-divider"
+               ng-click="rooms[rooms.selectedRoomID].showTips[section._id] = !rooms[rooms.selectedRoomID].showTips[section._id]">
+            <button>
+              <i class="icon"
+                 ng-class="!rooms[rooms.selectedRoomID].showTips[section._id] ? 'ion-plus' : 'ion-minus'">
+              </i>
+            </button>
+            Tips
+          </div>
+          <div ng-if="rooms[rooms.selectedRoomID].showTips[section._id]"
+               class="item item-body">
+            <p>
+              <span ng-bind="section['TIPS']"></span>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        Hospitality rating (1-10): {{section.hospitalityRating}}
+        <div class="range range-positive">
+          <i class="icon ion-ios-sunny-outline"></i>
+          <input type="range" min="0" max="10" step="1" value="5"
+                 ng-model="section.hospitalityRating" />
+          <i class="icon ion-ios-sunny"></i>
+        </div>
+      </div>
+      <div ng-repeat="(typeID, condition) in section.typesConditions"
+           class="item">
+        <div ng-include="'templates/checklists/typeConditions/generic-v3-1.html'"></div>
+      </div>
+      <div class="item">
+        <div class="list card">
+          <div class="item item-divider">Work Tracking</div>
+          <div class="item item-body">
+            <div ng-if="section.inspectionWorkTrackingConditions"
+                 class="button-bar">
+              <button ng-repeat="trackingCondition in rooms.inspectionWorkTrackingConditions"
+                      ng-if="trackingCondition.name"
+                      class="button button-stable button-block button-outline"
+                      ng-class="{active: section.inspectionWorkTrackingConditions.selection == trackingCondition._id}"
+                      ng-click="section.inspectionWorkTrackingConditions.selection = trackingCondition._id">
+                <span ng-bind="trackingCondition.name"></span>
+              </button>
+            </div>
+            <form class="list">
+              <ion-checkbox ng-model="section.workCompletedSinceLastInspection">
+                Work completed since last inspection
+              </ion-checkbox>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="button-bar">
+          <button id="entryHallway-button12"
+                  class="button button-positive  button-block"
+                  ng-click="rooms[rooms.selectedRoomID].openCommentsModal(section._id)">
+            Add/edit comments
+          </button>
+          <button id="entryHallway-button13"
+                  class="button button-positive  button-block"
+                  ng-click="rooms[rooms.selectedRoomID].openVideosModal(section._id)">
+            Add/edit videos
+          </button>
+          <button id="entryHallway-button14"
+                  class="button button-positive  button-block"
+                  ng-click="rooms[rooms.selectedRoomID].openImagesModal(section._id)">
+            Add/edit pictures
+          </button>
+        </div>
+      </div>
+    </div>
+</div>
