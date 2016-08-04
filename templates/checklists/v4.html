@@ -57,7 +57,7 @@
               <button ng-repeat="trackingCondition in rooms.inspectionWorkTrackingConditions"
                       ng-if="trackingCondition.name"
                       class="button button-block"
-                      ng-class="{active: section.inspectionWorkTrackingConditions.selection == trackingCondition._id,'button-{{trackingCondition['button-class']}}': trackingCondition['button-class']}"
+                      ng-class="{active: section.inspectionWorkTrackingConditions.selection == trackingCondition._id,'button-outline-active': section.inspectionWorkTrackingConditions.selection == trackingCondition._id,'button-{{trackingCondition['button-class']}}': trackingCondition['button-class']}"
                       ng-click="section.inspectionWorkTrackingConditions.selection = trackingCondition._id">
                 <span ng-bind="trackingCondition.name"></span>
               </button>
