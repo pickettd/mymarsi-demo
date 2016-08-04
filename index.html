@@ -6,6 +6,10 @@
     <title></title>
 
     <link href="css/ionic.app.css" rel="stylesheet">
+    <!-- This is a workaround to make sure that Ionic waits for the device to be ready when using Ionic View -->
+    <script>
+      window.phonegap = {};
+    </script>
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->

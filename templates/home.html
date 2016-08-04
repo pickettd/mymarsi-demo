@@ -1,4 +1,4 @@
-<ion-view title="Home" id="page13">
+<ion-view title="Home" id="home">
   <ion-content padding="true" class="has-header">
     <div class="list">
       <div class="item">
@@ -32,13 +32,13 @@
         </div>
         <div ng-if="home.selectedInspection">
           <a ng-click="home.createNewVisit(home.selectedProperty.name, home.selectedInspection)"
-             ui-sref="tabsController.general({inspectionID: home.selectedInspection._id, propertyID: home.selectedProperty._id})"
+             ui-sref="rooms.general({inspectionID: home.selectedInspection._id, propertyID: home.selectedProperty._id})"
              ui-sref-opts="{reload: true}"
              id="home-button5"
              class="button button-balanced button-block">Continue <span ng-bind="home.selectedInspection.name"></span> with a new visit</a>
         </div>
         <div ng-if="(home.selectedVisit.inspectionID)&&(home.selectedInspection._id === home.selectedVisit.inspectionID)">
-          <a ui-sref="tabsController.general({inspectionID: home.selectedInspection._id, propertyID: home.selectedProperty._id})"
+          <a ui-sref="rooms.general({inspectionID: home.selectedInspection._id, propertyID: home.selectedProperty._id})"
              ui-sref-opts="{reload: true}"
              id="home-button5"
              class="button button-positive button-block">Resume

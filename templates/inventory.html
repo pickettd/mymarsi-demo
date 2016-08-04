@@ -1,3 +1,42 @@
-<ion-view title="Inventory" id="page2">
-    <ion-content padding="true" class="has-header"></ion-content>
+<ion-view title="Inventory" id="inventory">
+  <ion-content padding="true" class="has-header">
+    <ion-item ng-repeat="item in inventory.items">
+      <span ng-if="item.isLabel"
+            ng-bind="item.label">
+      </span>
+      <span ng-if="!item.isLabel">
+        <div ng-repeat="part in item.parts track by $index">
+          <ion-checkbox ng-if="part.isCheckbox"
+                      ng-model="part.checkboxValue"
+                      class="no-border"
+                      ng-style="{'no-right-padding': part.text}">
+            <span ng-bind="part.text"></span>
+          </ion-checkbox>
+          <label ng-if="part.text"
+               class="item item-input no-border"
+               ng-style="{'no-left-padding': part.isCheckbox}">
+            <span ng-if="!part.isCheckbox"
+                  class="input-label"
+                  ng-bind="part.text"></span>
+            <input ng-if="part.isCount"
+                   type="text"
+                   placeholder="#"
+                   ng-model="part.countValue">
+            <input ng-if="!part.isCount && !part.isCheckbox"
+                   type="text"
+                   placeholder="Type here"
+                   ng-model="part.textValue">
+          </label>
+        </div>
+        <div>
+          <label class="item item-input no-border"
+                 ng-style="{'no-left-padding': part.isCheckbox}">
+            <input type="text"
+                   placeholder="Add comments here"
+                   ng-model="item.commentValue">
+          </label>
+        </div>
+      </span>
+    </ion-item>
+  </ion-content>
 </ion-view>
