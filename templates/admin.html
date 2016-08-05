@@ -7,7 +7,7 @@
             <div class="input-label">
               Unit/Property
             </div>
-            <select ng-options="unit as unit.name for unit in admin.units track by unit._id"
+            <select ng-options="unit as unit.name for unit in admin.allUnits.data track by unit._id"
                     ng-model="admin.selectedUnit"
                     ng-change="admin.getInspectionStubs(admin.selectedUnit._id)">
             </select>
