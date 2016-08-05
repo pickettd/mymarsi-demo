@@ -35,18 +35,18 @@
           </div>
         </div>
       </div>
+      <div ng-repeat="(typeID, condition) in section.typesConditions"
+           class="item">
+        <div ng-include="'templates/checklists/typeConditions/generic-v3-1.html'"></div>
+      </div>
       <div class="item">
         Hospitality rating (1-10): {{section.hospitalityRating}}
         <div class="range range-positive">
           <i class="icon ion-ios-sunny-outline"></i>
-          <input type="range" min="0" max="10" step="1" value="5"
+          <input type="range" class="range" min="0" max="10" step="1" value="5"
                  ng-model="section.hospitalityRating" />
           <i class="icon ion-ios-sunny"></i>
         </div>
-      </div>
-      <div ng-repeat="(typeID, condition) in section.typesConditions"
-           class="item">
-        <div ng-include="'templates/checklists/typeConditions/generic-v3-1.html'"></div>
       </div>
       <div class="item">
         <div class="list card">

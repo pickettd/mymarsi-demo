@@ -1,1 +1,1 @@
-angular.module("app.directives",[]).directive("blankDirective",[function(){}]).directive("customOnChange",function(){return{restrict:"A",link:function(n,e,i){var t=n.$eval(i.customOnChange);e.bind("change",t)}}});
+!function(){"use strict";angular.module("app.directives",[]).directive("customOnChange",function(){return{restrict:"A",link:function(n,t,i){var e=n.$eval(i.customOnChange);t.bind("change",e)}}}).directive("range",function(){return{restrict:"C",link:function(n,t,i){t.bind("touchstart mousedown",function(n){n.stopPropagation(),n.stopImmediatePropagation()})}}})}();
