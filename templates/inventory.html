@@ -1,8 +1,8 @@
 <ion-view title="Inventory" id="inventory">
   <ion-content padding="true" class="has-header">
     <ion-item ng-repeat="item in inventory.items">
-      <span ng-if="item.isLabel"
-            ng-bind="item.label">
+      <span ng-if="item.isLabel">
+        {{::item.label}}
       </span>
       <span ng-if="!item.isLabel">
         <div ng-repeat="part in item.parts track by $index">
@@ -10,14 +10,17 @@
                       ng-model="part.checkboxValue"
                       class="no-border"
                       ng-style="{'no-right-padding': part.text}">
-            <span ng-bind="part.text"></span>
+            <span>
+              {{::part.text}}
+            </span>
           </ion-checkbox>
           <label ng-if="part.text"
                class="item item-input no-border"
                ng-style="{'no-left-padding': part.isCheckbox}">
             <span ng-if="!part.isCheckbox"
-                  class="input-label"
-                  ng-bind="part.text"></span>
+                  class="input-label">
+              {{::part.text}}
+            </span>
             <input ng-if="part.isCount"
                    type="text"
                    placeholder="#"

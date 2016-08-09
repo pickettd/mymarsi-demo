@@ -1,18 +1,32 @@
-<div ng-repeat="section in rooms[rooms.selectedRoomID].sections"
-     ng-if="section._id"
+<div class="button-bar">
+  <button ng-repeat="(tradeName, tradeObject) in rooms.trades track by $index"
+          class="button button-block"
+          ng-class="{active: rooms.showTrade === tradeName,'button-outline-active': rooms.showTrade === tradeName}"
+          ng-click="rooms.showTrade = tradeName"
+          ng-style="{'background-color': tradeObject.color}">
+    <span>{{::tradeName}}</span>
+  </button>
+</div>
+<div ng-repeat="section in rooms[rooms.selectedRoomID].sections track by section._id"
+     ng-if="section._id && (section['Trade or Service'] === rooms.showTrade)"
      class="list card">
     <div class="item item-divider"
-         ng-click="rooms[rooms.selectedRoomID][section._id] = !rooms[rooms.selectedRoomID][section._id]">
+         ng-click="rooms.showSections.data[rooms.selectedRoomID][section._id] = !rooms.showSections.data[rooms.selectedRoomID][section._id]"
+         ng-style="{'background-color': rooms.trades[section['Trade or Service']].color}">
       <button><i class="icon"
-         ng-class="!rooms[rooms.selectedRoomID][section._id] ? 'ion-minus' : 'ion-plus'">
+         ng-class="!rooms.showSections.data[rooms.selectedRoomID][section._id] ? 'ion-minus' : 'ion-plus'">
       </i></button>
-      <!--<span ng-bind="section['Trade or Service']"></span>
-      <span> - </span>
-      <span ng-bind="section['Type']"></span>
-      <span> - </span>-->
-      <span ng-bind="section['Item']"></span>
+      <span>{{::section['Item']}}</span>
     </div>
-    <div ng-if="!rooms[rooms.selectedRoomID][section._id]">
+    <div ng-if="!rooms.showSections.data[rooms.selectedRoomID][section._id]">
+      <div>
+        <ion-checkbox ng-click="rooms.markSectionNA(section)"
+                      ng-checked="section.naChoice === 'N/A'">
+          <span>
+            Item not applicable
+          </span>
+        </ion-checkbox>
+      </div>
       <div ng-if="section['TIPS']"
            id="entryHallway-markdown4"
            style="color:#000000;"
@@ -25,17 +39,23 @@
                  ng-class="!rooms[rooms.selectedRoomID].showTips[section._id] ? 'ion-plus' : 'ion-minus'">
               </i>
             </button>
-            Tips
+            Tips and Details
           </div>
           <div ng-if="rooms[rooms.selectedRoomID].showTips[section._id]"
                class="item item-body">
+            <div>
+              <b>Trade and Type:</b>
+              <span>{{::section['Trade or Service']}}</span>
+              <span> - </span>
+              <span>{{::section['Type']}}</span>
+            </div>
             <p>
-              <span ng-bind="section['TIPS']"></span>
+              <span>{{::section['TIPS']}}</span>
             </p>
           </div>
         </div>
       </div>
-      <div ng-repeat="(typeID, condition) in section.typesConditions"
+      <div ng-repeat="(typeID, condition) in section.typesConditions track by typeID"
            class="item">
         <div ng-include="'templates/checklists/typeConditions/generic-v3-1.html'"></div>
       </div>
@@ -54,12 +74,12 @@
           <div class="item item-body">
             <div ng-if="section.inspectionWorkTrackingConditions"
                  class="button-bar">
-              <button ng-repeat="trackingCondition in rooms.inspectionWorkTrackingConditions"
+              <button ng-repeat="trackingCondition in rooms.inspectionWorkTrackingConditions.data track by trackingCondition._id"
                       ng-if="trackingCondition.name"
                       class="button button-block"
                       ng-class="{active: section.inspectionWorkTrackingConditions.selection == trackingCondition._id,'button-outline-active': section.inspectionWorkTrackingConditions.selection == trackingCondition._id,'button-{{trackingCondition['button-class']}}': trackingCondition['button-class']}"
                       ng-click="section.inspectionWorkTrackingConditions.selection = trackingCondition._id">
-                <span ng-bind="trackingCondition.name"></span>
+                <span>{{::trackingCondition.name}}</span>
               </button>
             </div>
             <form class="list">

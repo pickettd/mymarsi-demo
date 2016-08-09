@@ -31,16 +31,12 @@
           </label>
         </div>
         <div ng-if="home.selectedInspection">
-          <a ng-click="home.createNewVisit(home.selectedProperty.name, home.selectedInspection)"
-             ui-sref="rooms.general({})"
-             ui-sref-opts="{reload: true}"
+          <a ng-click="home.navigateWithVisit('new')"
              id="home-button5"
              class="button button-balanced button-block">Continue <span ng-bind="home.selectedInspection.name"></span> with a new visit</a>
         </div>
         <div ng-if="(home.selectedVisit.inspectionID)&&(home.selectedInspection._id === home.selectedVisit.inspectionID)">
-          <a ng-click="home.getInspectionData(home.selectedInspection._id)"
-             ui-sref="rooms.general({})"
-             ui-sref-opts="{reload: true}"
+          <a ng-click="home.navigateWithVisit()"
              id="home-button5"
              class="button button-positive button-block">Resume
             <span ng-bind="home.selectedVisit.name"></span>

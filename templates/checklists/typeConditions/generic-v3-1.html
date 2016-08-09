@@ -1,25 +1,27 @@
 <form class="list">
   <!--<div ng-include="rooms.typesConditions[typeID].templateFileName"></div>-->
-  <h2 ng-bind="typeID"></h2>
+  <h2>{{::typeID}}</h2>
   <label ng-repeat="optionGroup in rooms.typesConditions[typeID].options track by $index"
          class="item item-input">
     <span ng-repeat="option in optionGroup track by $index">
-      <span ng-if="option.isLabel"
-            ng-bind="option.optionName">
+      <span ng-if="option.isLabel">
+        {{::option.optionName}}
       </span>
       <span ng-if="!option.isLabel">
         <ion-checkbox ng-if="option.hasCheckbox"
                       ng-model="condition[option.optionID].checkboxValue"
                       class="no-border"
                       ng-style="{'no-right-padding': option.hasText}">
-          <span ng-if="!option.hasText"
-                ng-bind="option.optionName"></span>
+          <span ng-if="!option.hasText">
+            {{::option.optionName}}
+          </span>
         </ion-checkbox>
         <label ng-if="option.hasText"
                class="item item-input no-border"
                ng-style="{'no-left-padding': option.hasCheckbox}">
-          <span class="input-label"
-                ng-bind="option.optionName"></span>
+          <span class="input-label">
+            {{::option.optionName}}
+          </span>
           <input type="text"
                  placeholder="Type here"
                  ng-model="condition[option.optionID].textValue">
