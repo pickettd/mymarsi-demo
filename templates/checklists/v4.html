@@ -3,7 +3,8 @@
           class="button button-block"
           ng-class="{active: rooms.showTrade === tradeName,'button-outline-active': rooms.showTrade === tradeName}"
           ng-click="rooms.showTrade = tradeName"
-          ng-style="{'background-color': tradeObject.color}">
+          ng-style="{'background-color': tradeObject.color}"
+          ng-disabled="!tradeObject.rooms[rooms.selectedRoomID]">
     <span>{{::tradeName}}</span>
   </button>
 </div>
@@ -36,7 +37,8 @@
            class="item">
         <div class="list card no-margin">
           <div class="item item-divider"
-               ng-click="rooms[rooms.selectedRoomID].showTips[section._id] = !rooms[rooms.selectedRoomID].showTips[section._id]">
+               ng-click="rooms[rooms.selectedRoomID].showTips[section._id] = !rooms[rooms.selectedRoomID].showTips[section._id]"
+               style="background-color: #f0f8ff;">
             <button>
               <i class="icon"
                  ng-class="!rooms[rooms.selectedRoomID].showTips[section._id] ? 'ion-plus' : 'ion-minus'">
@@ -85,7 +87,8 @@
                       ng-if="trackingCondition.name"
                       class="button button-block"
                       ng-class="{active: section.inspectionWorkTrackingConditions.selection == trackingCondition._id,'button-outline-active': section.inspectionWorkTrackingConditions.selection == trackingCondition._id,'button-{{trackingCondition['button-class']}}': trackingCondition['button-class']}"
-                      ng-click="section.inspectionWorkTrackingConditions.selection = trackingCondition._id">
+                      ng-click="section.inspectionWorkTrackingConditions.selection = trackingCondition._id"
+                      style="white-space: normal;">
                 <span>{{::trackingCondition.name}}</span>
               </button>
             </div>
