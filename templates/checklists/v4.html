@@ -11,19 +11,22 @@
      ng-if="section._id && (section['Trade or Service'] === rooms.showTrade)"
      class="list card">
     <div class="item item-divider"
-         ng-click="rooms.showSections.data[rooms.selectedRoomID][section._id] = !rooms.showSections.data[rooms.selectedRoomID][section._id]"
-         ng-style="{'background-color': rooms.trades[section['Trade or Service']].color}">
+         ng-click="rooms.toggleSectionVisible(section)"
+         ng-style="{'background-color': rooms.trades[section['Trade or Service']].color}"
+         id="{{section._id}}">
       <button><i class="icon"
-         ng-class="!rooms.showSections.data[rooms.selectedRoomID][section._id] ? 'ion-minus' : 'ion-plus'">
+         ng-class="rooms.showSections.data[rooms.selectedRoomID] === section._id ? 'ion-minus' : 'ion-plus'">
       </i></button>
       <span>{{::section['Item']}}</span>
+      <span ng-if="section.markSectionComplete"
+            class="icon ion-checkmark-circled"></span>
     </div>
-    <div ng-if="!rooms.showSections.data[rooms.selectedRoomID][section._id]">
+    <div ng-if="rooms.showSections.data[rooms.selectedRoomID] === section._id">
       <div>
         <ion-checkbox ng-click="rooms.markSectionNA(section)"
-                      ng-checked="section.naChoice === 'N/A'">
+                      ng-checked="section.naChoice">
           <span>
-            Item not applicable
+            N/A
           </span>
         </ion-checkbox>
       </div>
@@ -55,6 +58,10 @@
           </div>
         </div>
       </div>
+      <!-- This is what we'd use to restrict type/conditions -->
+      <!--<div ng-repeat="(typeID, condition) in section.typesConditions track by typeID"
+           ng-if="(typeID === 'Clinical')||(typeID === 'Qualitative')||(typeID === ' Subjective')"
+           class="item">-->
       <div ng-repeat="(typeID, condition) in section.typesConditions track by typeID"
            class="item">
         <div ng-include="'templates/checklists/typeConditions/generic-v3-1.html'"></div>
