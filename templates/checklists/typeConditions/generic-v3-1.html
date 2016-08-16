@@ -2,8 +2,9 @@
   <!--<div ng-include="rooms.typesConditions[typeID].templateFileName"></div>-->
   <h2>{{::typeID}}</h2>
   <label ng-repeat="optionGroup in rooms.typesConditions[typeID].options track by $index"
-         class="item item-input">
-    <span ng-repeat="option in optionGroup track by $index">
+         class="item item-input row responsive-md">
+    <span ng-repeat="option in optionGroup track by $index"
+          class="col col-20">
       <span ng-if="option.isLabel">
         {{::option.optionName}}
       </span>
@@ -12,12 +13,13 @@
                       ng-model="condition[option.optionID].checkboxValue"
                       class="no-border"
                       ng-style="{'no-right-padding': option.hasText}">
-          <span ng-if="!option.hasText">
+          <span ng-if="!option.hasText"
+                class="type-condition-text">
             {{::option.optionName}}
           </span>
         </ion-checkbox>
         <label ng-if="option.hasText"
-               class="item item-input no-border"
+               class="item item-input no-border type-condition-text"
                ng-style="{'no-left-padding': option.hasCheckbox}">
           <span class="input-label">
             {{::option.optionName}}
