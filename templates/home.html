@@ -1,5 +1,9 @@
 <ion-view title="Home" id="home">
   <ion-content padding="true" class="has-header">
+    <div ng-if="home.activeSync.state">
+      <ion-spinner></ion-spinner>
+      Syncing new cloud data now
+    </div>
     <div class="list">
       <div class="item">
         <div class="list">
