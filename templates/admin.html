@@ -29,9 +29,17 @@
           </label>
         </div>
       </div>
-      <div ng-if="admin.selectedInspection"
+      <div ng-if="admin.selectedInspection">
+        <a ng-click="admin.getReportInspection(admin.selectedInspection._id)"
+           class="button button-balanced button-block">View all inspection data</a>
+      </div>
+      <div class="item item-divider"
+           ng-if="admin.selectedInspection && !admin.fullReportReady">
+        ...or view data per visit:
+      </div>
+      <div ng-if="admin.selectedInspection && !admin.fullReportReady"
            class="item">
-        <div ng-if="admin.visitStubs"
+        <div ng-if="admin.visitStubs && !admin.fullReportReady"
              class="list">
           <label class="item item-input item-select">
             <div class="input-label">
@@ -44,11 +52,14 @@
           </label>
         </div>
       </div>
-      <div ng-if="admin.selectedVisit"
+      <div ng-if="admin.selectedVisit && admin.visitData.ready && !admin.fullReportReady"
            class="item">
-        <pre ng-bind="admin.visitData">
+        <pre>
+        {{::admin.visitData.data}}
         </pre>
       </div>
+      <!-- Note this will only show up if the report is selected and ready -->
+      <div ng-include="'templates/admin-report-v1.html'"></div>
     </div>
   </ion-content>
 </ion-view>
