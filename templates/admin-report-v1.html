@@ -42,7 +42,7 @@
                 </button>
                 Type/Condition details
               </div>
-              <div ng-if="::admin.showConditionDetails[roomID][sectionID]"
+              <div ng-if="admin.showConditionDetails[roomID][sectionID]"
                    class="item">
                 <div ng-repeat="(typeID, condition) in ::sectionObject.typesConditions track by typeID"
                  class="list card no-margin">
