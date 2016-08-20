@@ -1,0 +1,165 @@
+<div class="button-bar">
+  <button ng-repeat="(tradeName, tradeObject) in rooms.trades track by $index"
+          class="button button-block"
+          ng-class="{active: rooms.showTrade === tradeName,'button-outline-active': rooms.showTrade === tradeName}"
+          ng-click="rooms.showTrade = tradeName"
+          ng-style="{'background-color': tradeObject.color}"
+          ng-disabled="!tradeObject.rooms[rooms.selectedRoomID] || tradeName === 'Other'">
+    <span>{{::tradeName}}</span>
+  </button>
+</div>
+<div ng-repeat="section in rooms[rooms.selectedRoomID].sections track by section._id"
+     ng-if="section._id && (section['Trade or Service'] === rooms.showTrade)"
+     class="list card">
+  <div class="item item-divider"
+       ng-click="rooms.toggleSectionVisible(section)"
+       ng-style="{'background-color': rooms.trades[section['Trade or Service']].color}"
+       id="{{section._id}}">
+    <button><i class="icon"
+       ng-class="rooms.showSections.data[rooms.selectedRoomID] === section._id ? 'ion-minus' : 'ion-plus'">
+    </i></button>
+    <span>{{::section['Item']}}</span>
+    <span ng-if="section.markSectionComplete"
+          class="icon ion-checkmark-circled"></span>
+  </div>
+  <div ng-if="rooms.showSections.data[rooms.selectedRoomID] === section._id">
+    <div>
+      <ion-checkbox ng-click="rooms.markSectionNA(section)"
+                    ng-checked="section.naChoice">
+        <span>
+          N/A
+        </span>
+      </ion-checkbox>
+    </div>
+    <div ng-if="section['TIPS']"
+         id="entryHallway-markdown4"
+         style="color:#000000;"
+         class="item">
+      <div class="list card no-margin">
+        <div class="item item-divider"
+             ng-click="rooms[rooms.selectedRoomID].showTips[section._id] = !rooms[rooms.selectedRoomID].showTips[section._id]"
+             style="background-color: #f0f8ff;">
+          <button class="button-tips">
+            <i class="icon"
+               ng-class="!rooms[rooms.selectedRoomID].showTips[section._id] ? 'ion-plus' : 'ion-minus'">
+            </i>
+          </button>
+          Tips and Details
+        </div>
+        <div ng-if="rooms[rooms.selectedRoomID].showTips[section._id]"
+             class="item item-body">
+          <div>
+            <b>Trade and Type:</b>
+            <span>{{::section['Trade or Service']}}</span>
+            <span> - </span>
+            <span>{{::section['Type']}}</span>
+          </div>
+          <p>
+            <span>{{::section['TIPS']}}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- This is what we'd use to restrict type/conditions -->
+    <!--<div ng-repeat="(typeID, condition) in section.typesConditions track by typeID"
+         ng-if="(typeID === 'Clinical')||(typeID === 'Qualitative')||(typeID === ' Subjective')"
+         class="item">-->
+    <div ng-repeat="(typeID, condition) in section.typesConditions track by typeID"
+         ng-if="!rooms.hideTypeConditions[typeID]"
+         class="item">
+      <div ng-include="'templates/checklists/typeConditions/generic-v3-1.html'"></div>
+    </div>
+    <div class="item">
+      Hospitality rating (1-10): {{section.hospitalityRating}}
+      <div class="range range-positive">
+        <i class="icon ion-ios-sunny-outline"></i>
+        <input type="range" class="range" min="0" max="10" step="1" value="5"
+               ng-model="section.hospitalityRating" />
+        <i class="icon ion-ios-sunny"></i>
+      </div>
+    </div>
+    <div class="item">
+      <div class="list card">
+        <div class="item item-divider">Priority + Comfort = Timeline</div>
+        <div class="item item-body">
+          <div ng-if="section.inspectionWorkTrackingConditions"
+               class="button-bar">
+            <button ng-repeat="trackingCondition in rooms.inspectionWorkTrackingConditions.data track by trackingCondition._id"
+                    ng-if="trackingCondition.name"
+                    class="button button-block"
+                    ng-class="{active: section.inspectionWorkTrackingConditions.selection == trackingCondition._id,'button-outline-active': section.inspectionWorkTrackingConditions.selection == trackingCondition._id,'button-{{trackingCondition['button-class']}}': trackingCondition['button-class']}"
+                    ng-click="section.inspectionWorkTrackingConditions.selection = trackingCondition._id"
+                    style="white-space: normal;">
+              <span>{{::trackingCondition.name}}</span>
+            </button>
+          </div>
+          <form class="list">
+            <label class="item item-input">
+              <ion-checkbox ng-click="section.complyChoice = '100% complies now'"
+                            ng-checked="section.complyChoice == '100% complies now'"
+                            class="no-border">
+                <span>
+                  100% complies now
+                </span>
+              </ion-checkbox>
+              <ion-checkbox ng-click="section.complyChoice = 'Doesn\'t comply now'"
+                            ng-checked="section.complyChoice == 'Doesn\'t comply now'"
+                            class="no-border">
+                <span>
+                  Doesn't comply now
+                </span>
+              </ion-checkbox>
+            </label>
+            <label class="item item-input">
+              <ion-checkbox ng-click="section.complyChoice = 'Not 100% now but will comply'"
+                            ng-checked="section.complyChoice == 'Not 100% now but will comply'"
+                            class="no-border">
+                <span>
+                  Not 100% now but will comply
+                </span>
+              </ion-checkbox>
+              <ion-checkbox ng-click="section.complyChoice = 'Will not comply'"
+                            ng-checked="section.complyChoice == 'Will not comply'"
+                            class="no-border">
+                <span>
+                  Will not comply
+                </span>
+              </ion-checkbox>
+            </label>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="button-bar">
+        <button id="entryHallway-button12"
+                class="button button-positive  button-block"
+                ng-click="rooms[rooms.selectedRoomID].openCommentsModal(section._id)">
+          Add/edit comments
+        </button>
+        <button id="entryHallway-button13"
+                class="button button-positive  button-block"
+                ng-click="rooms[rooms.selectedRoomID].openVideosModal(section._id)">
+          Add/edit videos
+        </button>
+        <button id="entryHallway-button14"
+                class="button button-positive  button-block"
+                ng-click="rooms[rooms.selectedRoomID].openImagesModal(section._id)">
+          Add/edit pictures
+        </button>
+      </div>
+    </div>
+  </div>
+  <div ng-if="rooms.showSections.data[rooms.selectedRoomID] === section._id"
+       class="item item-divider"
+       ng-click="rooms.toggleSectionVisible(section)"
+       ng-style="{'background-color': rooms.trades[section['Trade or Service']].color}"
+       id="{{section._id}}">
+    <button><i class="icon"
+       ng-class="rooms.showSections.data[rooms.selectedRoomID] === section._id ? 'ion-minus' : 'ion-plus'">
+    </i></button>
+    <span>Collapse: {{::section['Item']}}</span>
+    <span ng-if="section.markSectionComplete"
+          class="icon ion-checkmark-circled"></span>
+  </div>
+</div>
