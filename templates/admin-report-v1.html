@@ -52,9 +52,11 @@
                   <div class="item">
                     <div class="list">
                       <div ng-repeat="(optionID, optionObject) in ::condition"
+                           ng-if="optionObject.checkboxValue || optionObject.textValue"
                            class="item"
-                           ng-init="thisOption = admin.getOptionTemplateFromID(typeID, optionID)">
-                        <span ng-bind="::thisOption.optionName"></span>
+                           ng-init="thisOptionTemplate = admin.getOptionTemplateFromID(typeID, optionID)">
+                        <span ng-bind="::thisOptionTemplate.optionName"></span><span ng-if="::thisOption.textValue">:</span>
+                        <span ng-bind="::optionObject.textValue"></span>
                       </div>
                     </div>
                   </div>
@@ -76,7 +78,17 @@
           </div>
           <div ng-if="::sectionObject.comments"
                class="item">
-            Has comments
+            <div class="list card no-margin">
+              <div class="item item-divider">
+                Comments
+              </div>
+              <div ng-repeat="comment in ::sectionObject.comments"
+                   class="item">
+                <div>
+                  <p ng-bind="comment.text"></p>
+                </div>
+              </div>
+            </div>
           </div>
           <div ng-if="::sectionObject.images"
                class="item">
