@@ -55,6 +55,7 @@
                            ng-if="optionObject.checkboxValue || optionObject.textValue"
                            class="item"
                            ng-init="thisOptionTemplate = admin.getOptionTemplateFromID(typeID, optionID)">
+                        <span ng-bind="::thisOptionTemplate.subLabel"></span><span ng-if="::thisOptionTemplate.subLabel"> - </span>
                         <span ng-bind="::thisOptionTemplate.optionName"></span><span ng-if="::thisOption.textValue">:</span>
                         <span ng-bind="::optionObject.textValue"></span>
                       </div>

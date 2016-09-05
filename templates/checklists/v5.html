@@ -12,51 +12,24 @@
      ng-if="section._id && (section['Trade or Service'] === rooms.showTrade)"
      class="list card">
   <div class="item item-divider"
+       ng-click="rooms.toggleSectionVisible(section)"
        ng-style="{'background-color': rooms.trades[section['Trade or Service']].color}"
        id="{{section._id}}">
-    <button ng-click="rooms.toggleSectionVisible(section)">
-      <i class="icon"
+    <button><i class="icon"
        ng-class="rooms.showSections.data[rooms.selectedRoomID] === section._id ? 'ion-minus' : 'ion-plus'">
-      </i>
-    </button>
-    <span ng-click="rooms.toggleSectionVisible(section)">{{::section['Item']}}</span>
+    </i></button>
+    <span>{{::section['Item']}}</span>
     <span ng-if="section.markSectionComplete"
           class="icon ion-checkmark-circled"></span>
-    <span ng-if="!section.markSectionComplete"
-          style="padding-left: 10px;"
-          ng-click="rooms.markSectionNA(section); $event.stopPropagation();">
-      <input type="checkbox"
-             ng-model="section.naChoice">
-      N/A
-    </span>
   </div>
   <div ng-if="rooms.showSections.data[rooms.selectedRoomID] === section._id">
-    <div class="item">
-      <div ng-if="section.markSectionComplete">
-        <ion-checkbox ng-click="rooms.markSectionNA(section)"
-                      ng-checked="section.naChoice">
-          <span>
-            N/A
-          </span>
-        </ion-checkbox>
-      </div>
-      <div class="button-bar">
-        <button id="entryHallway-button12"
-                class="button button-positive  button-block"
-                ng-click="rooms[rooms.selectedRoomID].openCommentsModal(section._id)">
-          Add/edit comments
-        </button>
-        <button id="entryHallway-button13"
-                class="button button-positive  button-block"
-                ng-click="rooms[rooms.selectedRoomID].openVideosModal(section._id)">
-          Add/edit videos
-        </button>
-        <button id="entryHallway-button14"
-                class="button button-positive  button-block"
-                ng-click="rooms[rooms.selectedRoomID].openImagesModal(section._id)">
-          Add/edit pictures
-        </button>
-      </div>
+    <div>
+      <ion-checkbox ng-click="rooms.markSectionNA(section)"
+                    ng-checked="section.naChoice">
+        <span>
+          N/A
+        </span>
+      </ion-checkbox>
     </div>
     <div ng-if="section['TIPS']"
          id="entryHallway-markdown4"
@@ -155,6 +128,25 @@
             </label>
           </form>
         </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="button-bar">
+        <button id="entryHallway-button12"
+                class="button button-positive  button-block"
+                ng-click="rooms[rooms.selectedRoomID].openCommentsModal(section._id)">
+          Add/edit comments
+        </button>
+        <button id="entryHallway-button13"
+                class="button button-positive  button-block"
+                ng-click="rooms[rooms.selectedRoomID].openVideosModal(section._id)">
+          Add/edit videos
+        </button>
+        <button id="entryHallway-button14"
+                class="button button-positive  button-block"
+                ng-click="rooms[rooms.selectedRoomID].openImagesModal(section._id)">
+          Add/edit pictures
+        </button>
       </div>
     </div>
   </div>
