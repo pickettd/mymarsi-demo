@@ -33,7 +33,7 @@
         <a ng-click="admin.getReportInspection(admin.selectedInspection._id)"
            class="button button-balanced button-block">View all inspection data</a>
       </div>
-      <div class="item item-divider"
+      <!--<div class="item item-divider"
            ng-if="admin.selectedInspection && !admin.fullReportReady">
         ...or view data per visit:
       </div>
@@ -57,7 +57,7 @@
         <pre>
         {{::admin.visitData.data}}
         </pre>
-      </div>
+      </div>-->
       <!-- Note this will only show up if the report is selected and ready -->
       <div ng-include="'templates/admin-report-v1.html'"></div>
     </div>
