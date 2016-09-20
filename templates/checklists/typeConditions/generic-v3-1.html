@@ -1,9 +1,9 @@
 <form class="list">
   <!--<div ng-include="rooms.typesConditions[typeID].templateFileName"></div>-->
   <h2>{{::typeID}}</h2>
-  <label ng-repeat="optionGroup in rooms.typesConditions[typeID].options track by $index"
+  <label ng-repeat="optionGroup in ::rooms.typesConditions[typeID].options track by $index"
          class="item item-input row responsive-md">
-    <span ng-repeat="option in optionGroup track by $index"
+    <span ng-repeat="option in ::optionGroup track by $index"
           class="col col-20">
       <span ng-if="option.isLabel">
         {{::option.optionName}}

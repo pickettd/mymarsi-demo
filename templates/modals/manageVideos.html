@@ -46,13 +46,13 @@
       <div class="item item-divider">
         Edit Videos
         <button class="pull-right"
-                ng-click="rooms[rooms.selectedRoomID].sections[rooms[rooms.selectedRoomID].modalSection].showDelete = !rooms[rooms.selectedRoomID].sections[rooms[rooms.selectedRoomID].modalSection].showDelete">
+                ng-click="rooms[rooms.selectedRoomID][rooms[rooms.selectedRoomID].modalSection].showDelete = !rooms[rooms.selectedRoomID][rooms[rooms.selectedRoomID].modalSection].showDelete">
           <span class="icon ion-trash-a"></span>
         </button>
       </div>
         <div class="item item-body">
           <ion-list show-delete="rooms[rooms.selectedRoomID].sections[rooms[rooms.selectedRoomID].modalSection].showDelete">
-            <ion-item ng-repeat="videoArray in rooms[rooms.selectedRoomID].sections[rooms[rooms.selectedRoomID].modalSection].videos"
+            <ion-item ng-repeat="videoArray in rooms[rooms.selectedRoomID][rooms[rooms.selectedRoomID].modalSection].videos track by videoArray._id"
                       style="width: 50%; height: auto;">
               <videogular vg-theme="rooms.videoConfig.theme" vg-error="rooms.videoError" vg-plays-inline="true">
                 <vg-media vg-src="videoArray.array"

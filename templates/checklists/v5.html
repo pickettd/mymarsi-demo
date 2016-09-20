@@ -1,5 +1,5 @@
 <div class="button-bar">
-  <button ng-repeat="(tradeName, tradeObject) in rooms.trades track by $index"
+  <button ng-repeat="(tradeName, tradeObject) in ::rooms.trades track by $index"
           class="button button-block"
           ng-class="{active: rooms.showTrade === tradeName,'button-outline-active': rooms.showTrade === tradeName}"
           ng-click="rooms.showTrade = tradeName"
@@ -8,7 +8,7 @@
     <span>{{::tradeName}}</span>
   </button>
 </div>
-<div ng-repeat="section in rooms[rooms.selectedRoomID].sections track by section._id"
+<div ng-repeat="section in ::rooms[rooms.selectedRoomID].sections track by section._id"
      ng-if="section._id && (section['Trade or Service'] === rooms.showTrade)"
      class="list card">
   <div class="item item-divider"
@@ -91,7 +91,7 @@
     <!--<div ng-repeat="(typeID, condition) in section.typesConditions track by typeID"
          ng-if="(typeID === 'Clinical')||(typeID === 'Qualitative')||(typeID === ' Subjective')"
          class="item">-->
-    <div ng-repeat="(typeID, condition) in section.typesConditions track by typeID"
+    <div ng-repeat="(typeID, condition) in ::section.typesConditions track by typeID"
          ng-if="!rooms.hideTypeConditions[typeID]"
          class="item">
       <div ng-include="'templates/checklists/typeConditions/generic-v3-1.html'"></div>
@@ -111,7 +111,7 @@
         <div class="item item-body">
           <div ng-if="section.inspectionWorkTrackingConditions"
                class="button-bar">
-            <button ng-repeat="trackingCondition in rooms.inspectionWorkTrackingConditions.data track by trackingCondition._id"
+            <button ng-repeat="trackingCondition in ::rooms.inspectionWorkTrackingConditions.data track by trackingCondition._id"
                     ng-if="trackingCondition.name"
                     class="button button-block"
                     ng-class="{active: section.inspectionWorkTrackingConditions.selection == trackingCondition._id,'button-outline-active': section.inspectionWorkTrackingConditions.selection == trackingCondition._id,'button-{{trackingCondition['button-class']}}': trackingCondition['button-class']}"

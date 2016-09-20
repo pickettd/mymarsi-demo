@@ -16,9 +16,6 @@
                    ng-src="{{rooms[rooms.selectedRoomID].newImages[rooms[rooms.selectedRoomID].modalSection].src}}"
                    style="width: 100%; height: auto;">
             </div>
-            <div class="padding">
-              <button type="submit" class="button button-block button-positive">Add</button>
-            </div>
           </form>
         </div>
     </div>
@@ -26,7 +23,7 @@
       <div class="item item-divider">Edit Pictures</div>
         <div class="item item-body">
           <ion-list show-delete="true">
-            <ion-item ng-repeat="image in rooms[rooms.selectedRoomID].sections[rooms[rooms.selectedRoomID].modalSection].images track by image._id">
+            <ion-item ng-repeat="image in rooms[rooms.selectedRoomID][rooms[rooms.selectedRoomID].modalSection].images track by image._id">
               <img ng-src="{{image.src}}"
                    style="width: 50%; height: auto;">
               <ion-delete-button class="ion-trash-a"
