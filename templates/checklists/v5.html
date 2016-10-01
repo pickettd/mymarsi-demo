@@ -26,6 +26,7 @@
           style="padding-left: 10px;"
           ng-click="rooms.markSectionNA(section); $event.stopPropagation();">
       <input type="checkbox"
+             ng-click="$event.preventDefault();"
              ng-model="section.naChoice">
       N/A
     </span>

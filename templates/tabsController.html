@@ -46,7 +46,13 @@
                  title="Bathroom #1"
                  icon="ion-waterdrop"
                  href="#/rooms/bathroom1">
-            <ion-nav-view name="tab6"></ion-nav-view>
+            <ion-nav-view name="tab16"></ion-nav-view>
+        </ion-tab>
+        <ion-tab ng-if="tabs.selectedTemplate.data['BATHROOM #2']"
+                 title="Bathroom #2"
+                 icon="ion-waterdrop"
+                 href="#/rooms/bathroom2">
+            <ion-nav-view name="tab17"></ion-nav-view>
         </ion-tab>
         <!--<ion-tab title="Bathroom #2" icon="ion-waterdrop" href="#/rooms/bathroom2">
             <ion-nav-view name="tab7"></ion-nav-view>
@@ -61,7 +67,13 @@
                  title="Bedroom #1"
                  icon="ion-home"
                  href="#/rooms/bedroom1">
-            <ion-nav-view name="tab8"></ion-nav-view>
+            <ion-nav-view name="tab18"></ion-nav-view>
+        </ion-tab>
+        <ion-tab ng-if="tabs.selectedTemplate.data['BEDROOM #2']"
+                 title="Bedroom #2"
+                 icon="ion-home"
+                 href="#/rooms/bedroom2">
+            <ion-nav-view name="tab19"></ion-nav-view>
         </ion-tab>
         <!--<ion-tab title="Bedroom #2" icon="ion-home" href="#/rooms/bedroom2">
             <ion-nav-view name="tab9"></ion-nav-view>
