@@ -25,7 +25,7 @@
           <ion-list show-delete="true">
             <ion-item ng-repeat="image in rooms[rooms.selectedRoomID][rooms[rooms.selectedRoomID].modalSection].images track by image._id">
               <img ng-src="{{image.src}}"
-                   style="width: 50%; height: auto;">
+                   class="image-thumbnail-modal">
               <ion-delete-button class="ion-trash-a"
                        ng-click="rooms[rooms.selectedRoomID].deleteImage(image._id)">
               </ion-delete-button>

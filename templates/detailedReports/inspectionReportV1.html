@@ -1,5 +1,10 @@
 <div ng-if="reports.selectedInspection && reports.fullReportReady">
-  <!--<div class="item">
+  <div class="item">
+    Hospitality average:
+    {{reports.sumOfHospitalityPoints / reports.countOfHospitalityDataPoints | number}}
+    / 10
+  </div>
+  <div class="item" id="conditionTable">
     <div class="row">
       <div class="col table-cell">
         <b>Priority + Comfort = Timeline</b>
@@ -15,155 +20,266 @@
         <span ng-bind="::reports.inspectionWorkTrackingConditions.data[conditionKey].name"></span>
       </div>
       <div class="col table-cell"
-           ng-class="'condition-'+conditionKey">
-        <span ng-bind="::conditionCollection.length"></span>
+           ng-class="'condition-'+conditionKey"
+           ng-click="reports.scrollToCondition(conditionKey)">
+        <a href style="color: white;">
+          <span ng-bind="::conditionCollection.length"></span>
+          <span>/ <span ng-bind="::reports.countOfConditionDataPoints"></span></span>
+        </a>
       </div>
     </div>
   </div>
   <div class="item">
-    <div class="list card no-margin">
-      <div class="item item-divider condition-Zen">Zen</div>
-      <div class="item"
-           ng-repeat="item in ::reports.itemsByCondition.data['Zen']">
-        <a href><span ng-bind="item.sectionKey"></span></a>
-      </div>
-    </div>
+    <button class="button button-dark" ng-click="reports.defaultPrintView()">Default print view (no images)</button>
+    <!--<button class="button button-calm" ng-click="reports.closeAllImageSections()">-->
+    <button disabled class="button button-calm" ng-click="">Hide all images</button>
+    <!--<button class="button button-positive" ng-click="reports.openAllImageSections()">-->
+    <button disabled class="button button-calm" ng-click="">Show all images</button>
   </div>
   <div class="item">
     <div class="list card no-margin">
-      <div class="item item-divider condition-Delayed">Delayed</div>
-      <div class="item"
-           ng-repeat="item in ::reports.itemsByCondition.data['Delayed']">
-        <a href><span ng-bind="item.sectionKey"></span></a>
-      </div>
-    </div>
-  </div>
-  <div class="item">
-    <div class="list card no-margin">
-      <div class="item item-divider condition-Immediate">Immediate</div>
-      <div class="item"
-           ng-repeat="item in ::reports.itemsByCondition.data['Immediate']">
-        <a href><span ng-bind="item.sectionKey"></span></a>
-      </div>
-    </div>
-  </div>
-  <div class="item">
-    <div class="list card no-margin">
-      <div class="item item-divider condition-Serious">Serious</div>
-      <div class="item"
-           ng-repeat="item in ::reports.itemsByCondition.data['Serious']">
-        <a href><span ng-bind="item.sectionKey"></span></a>
-      </div>
-    </div>
-  </div>
-  <div class="item">
-    <div class="list card no-margin">
-      <div class="item item-divider condition-Urgent">Urgent</div>
-      <div class="item"
-           ng-repeat="item in ::reports.itemsByCondition.data['Urgent']">
-        <a href><span ng-bind="item.sectionKey"></span></a>
-      </div>
-    </div>
-  </div>-->
-  <div class="item">
-    <div ng-repeat="(roomID, roomObject) in ::reports.fullInspection.data"
-         class="list card no-margin"
-         ng-if="::roomID !== 'Inventory'">
       <div class="item item-divider"
-           ng-click="reports.hideRoom[roomID] = !reports.hideRoom[roomID]">
+           ng-click="reports.showByCondition = !reports.showByCondition">
         <button>
           <i class="icon"
-             ng-class="reports.hideRoom[roomID] ? 'ion-plus' : 'ion-minus'">
+             ng-class="reports.showByCondition ? 'ion-minus' : 'ion-plus'">
           </i>
         </button>
-        <span ng-bind="::roomID"></span>
+        <span>View by condition</span>
       </div>
-      <div ng-if="!reports.hideRoom[roomID]"
+      <div ng-if="reports.showByCondition">
+        <div class="item" id="ZenSection">
+          <div class="list card no-margin">
+            <div class="item item-divider condition-Zen">
+              Zen
+              <a ng-click="reports.scrollToConditionTable()"
+                 class="report-return-top"
+                 href>
+                <span>(Return to top <i class="icon ion-arrow-up-a"></i>)</span>
+              </a>
+            </div>
+            <div class="item"
+                 ng-repeat="item in ::reports.itemsByCondition.data['Zen']"
+                 ng-click="reports.scrollToSection(item.roomKey, item.sectionKey)">
+              <a href><span ng-bind="item.sectionKey"></span></a>
+            </div>
+          </div>
+        </div>
+        <div class="item" id="DelayedSection">
+          <div class="list card no-margin">
+            <div class="item item-divider condition-Delayed">
+              Delayed
+              <a ng-click="reports.scrollToConditionTable()"
+                 class="report-return-top"
+                 href>
+                <span>(Return to top <i class="icon ion-arrow-up-a"></i>)</span>
+              </a>
+            </div>
+            <div class="item"
+                 ng-repeat="item in ::reports.itemsByCondition.data['Delayed']"
+                 ng-click="reports.scrollToSection(item.roomKey, item.sectionKey)">
+              <a href><span ng-bind="item.sectionKey"></span></a>
+            </div>
+          </div>
+        </div>
+        <div class="item" id="ImmediateSection">
+          <div class="list card no-margin">
+            <div class="item item-divider condition-Immediate">
+              Immediate
+              <a ng-click="reports.scrollToConditionTable()"
+                 class="report-return-top"
+                 href>
+                <span>(Return to top <i class="icon ion-arrow-up-a"></i>)</span>
+              </a>
+            </div>
+            <div class="item"
+                 ng-repeat="item in ::reports.itemsByCondition.data['Immediate']"
+                 ng-click="reports.scrollToSection(item.roomKey,item.sectionKey)">
+              <a href><span ng-bind="item.sectionKey"></span></a>
+            </div>
+          </div>
+        </div>
+        <div class="item" id="SeriousSection">
+          <div class="list card no-margin">
+            <div class="item item-divider condition-Serious">
+              Serious
+              <a ng-click="reports.scrollToConditionTable()"
+                 class="report-return-top"
+                 href>
+                <span>(Return to top <i class="icon ion-arrow-up-a"></i>)</span>
+              </a>
+            </div>
+            <div class="item"
+                 ng-repeat="item in ::reports.itemsByCondition.data['Serious']"
+                 ng-click="reports.scrollToSection(item.roomKey,item.sectionKey)">
+              <a href><span ng-bind="item.sectionKey"></span></a>
+            </div>
+          </div>
+        </div>
+        <div class="item" id="UrgentSection">
+          <div class="list card no-margin">
+            <div class="item item-divider condition-Urgent">
+              Urgent
+              <a ng-click="reports.scrollToConditionTable()"
+                 class="report-return-top"
+                 href>
+                <span>(Return to top <i class="icon ion-arrow-up-a"></i>)</span>
+              </a>
+            </div>
+            <div class="item"
+                 ng-repeat="item in ::reports.itemsByCondition.data['Urgent']"
+                 ng-click="reports.scrollToSection(item.roomKey,item.sectionKey)">
+              <a href><span ng-bind="item.sectionKey"></span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item">
+    <div class="list card no-margin">
+      <div class="item item-divider"
+           ng-click="reports.showByRoom = !reports.showByRoom">
+        <button>
+          <i class="icon"
+             ng-class="reports.showByRoom ? 'ion-minus' : 'ion-plus'">
+          </i>
+        </button>
+        <span>View by room</span>
+      </div>
+      <div ng-if="reports.showByRoom"
            class="item">
-        <div ng-repeat="(sectionID, sectionObject) in ::roomObject.data"
-             class="list card no-margin">
+        <div ng-repeat="(roomID, roomObject) in ::reports.fullInspection.data"
+             class="list card no-margin"
+             ng-if="::roomID !== 'Inventory'">
           <div class="item item-divider"
-               ng-click="reports.hideSection[roomID][sectionID] = !reports.hideSection[roomID][sectionID]">
+               ng-click="reports.hideRoom[roomID] = !reports.hideRoom[roomID]">
             <button>
               <i class="icon"
-                 ng-class="reports.hideSection[roomID][sectionID] ? 'ion-plus' : 'ion-minus'">
+                 ng-class="reports.hideRoom[roomID] ? 'ion-plus' : 'ion-minus'">
               </i>
             </button>
-            <span ng-bind="::reports.selectedTemplate.data[roomID].data[sectionID].Item"></span>
+            <span ng-bind="::roomID"></span>
+            <span>
+              (Hospitality average:
+              {{reports.perRoomAvgOfConditionPoints[roomID]  | number}} / 10)
+            </span>
           </div>
-          <div ng-if="!reports.hideSection[roomID][sectionID]">
-            <div ng-if="::sectionObject.naChoice"
-                 class="item">
-              N/A
-            </div>
-            <div ng-if="::sectionObject.typesConditions"
-                 class="item">
-              <div class="list card no-margin">
-                <div class="item item-divider"
-                     ng-click="reports.showConditionDetails[roomID][sectionID] = !reports.showConditionDetails[roomID][sectionID]">
-                  <button>
-                    <i class="icon"
-                       ng-class="!reports.showConditionDetails[roomID][sectionID] ? 'ion-plus' : 'ion-minus'">
-                    </i>
-                  </button>
-                  Type/Condition details
-                </div>
-                <div ng-if="reports.showConditionDetails[roomID][sectionID]"
+          <div ng-if="!reports.hideRoom[roomID]"
+               class="item">
+            <div ng-repeat="(sectionID, sectionObject) in ::roomObject.data"
+                 class="list card no-margin"
+                 ng-attr-id="{{sectionID}}">
+              <div class="item item-divider"
+                   ng-click="reports.hideSection[roomID][sectionID] = !reports.hideSection[roomID][sectionID]">
+                <button>
+                  <i class="icon"
+                     ng-class="reports.hideSection[roomID][sectionID] ? 'ion-plus' : 'ion-minus'">
+                  </i>
+                </button>
+                <span ng-bind="::reports.selectedTemplate.data[roomID].data[sectionID].Item"></span>
+                <span ng-if="::sectionObject.naChoice"> - N/A</span>
+                <a ng-click="reports.scrollToConditionTable()"
+                   class="report-return-top"
+                   style="color: black;"
+                   href>
+                  <span>(Return to top <i class="icon ion-arrow-up-a"></i>)</span>
+                </a>
+              </div>
+              <div ng-if="!reports.hideSection[roomID][sectionID]">
+                <div ng-if="::sectionObject.naChoice"
                      class="item">
-                  <div ng-repeat="(typeID, condition) in ::sectionObject.typesConditions track by typeID"
-                   class="list card no-margin">
-                    <div class="item item-divider">
-                      {{::typeID}}
+                  N/A
+                </div>
+                <div ng-if="::sectionObject.typesConditions"
+                     class="item">
+                  <div class="list card no-margin">
+                    <div class="item item-divider"
+                         ng-click="reports.showConditionDetails[roomID][sectionID] = !reports.showConditionDetails[roomID][sectionID]">
+                      <button>
+                        <i class="icon"
+                           ng-class="!reports.showConditionDetails[roomID][sectionID] ? 'ion-plus' : 'ion-minus'">
+                        </i>
+                      </button>
+                      Type/Condition details
                     </div>
-                    <div class="item">
-                      <div class="list">
-                        <div ng-repeat="(optionID, optionObject) in ::condition"
-                             ng-if="optionObject.checkboxValue || optionObject.textValue"
-                             class="item"
-                             ng-init="thisOptionTemplate = reports.getOptionTemplateFromID(typeID, optionID)">
-                          <span ng-bind="::thisOptionTemplate.subLabel"></span><span ng-if="::thisOptionTemplate.subLabel"> - </span>
-                          <span ng-bind="::thisOptionTemplate.optionName"></span><span ng-if="::thisOption.textValue">:</span>
-                          <span ng-bind="::optionObject.textValue"></span>
+                    <div ng-if="reports.showConditionDetails[roomID][sectionID]"
+                         class="item">
+                      <div ng-repeat="(typeID, condition) in ::sectionObject.typesConditions track by typeID"
+                       class="list card no-margin">
+                        <div class="item item-divider">
+                          {{::typeID}}
+                        </div>
+                        <div class="item">
+                          <div class="list">
+                            <div ng-repeat="(optionID, optionObject) in ::condition"
+                                 ng-if="optionObject.checkboxValue || optionObject.textValue"
+                                 class="item"
+                                 ng-init="thisOptionTemplate = reports.getOptionTemplateFromID(typeID, optionID)">
+                              <span ng-bind="::thisOptionTemplate.subLabel"></span><span ng-if="::thisOptionTemplate.subLabel"> - </span>
+                              <span ng-bind="::thisOptionTemplate.optionName"></span><span ng-if="::thisOption.textValue">:</span>
+                              <span ng-bind="::optionObject.textValue"></span>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div ng-if="::sectionObject.hospitalityRating"
-                 class="item">
-              Hospitality rating (1-10): {{sectionObject.hospitalityRating}}
-            </div>
-            <div ng-if="::sectionObject.inspectionWorkTrackingConditions.selection"
-                 class="item">
-              <span ng-bind="::reports.inspectionWorkTrackingConditions.data[sectionObject.inspectionWorkTrackingConditions.selection].name"></span>
-            </div>
-            <div ng-if="::sectionObject.complyChoice"
-                 class="item">
-              <span ng-bind="::sectionObject.complyChoice"></span>
-            </div>
-            <div ng-if="::sectionObject.comments"
-                 class="item">
-              <div class="list card no-margin">
-                <div class="item item-divider">
-                  Comments
-                </div>
-                <div ng-repeat="comment in ::sectionObject.comments"
+                <div ng-if="::sectionObject.hospitalityRating"
                      class="item">
-                  <div>
-                    <p ng-bind="comment.text"></p>
+                  Hospitality rating (1-10): {{sectionObject.hospitalityRating}}
+                </div>
+                <div ng-if="::sectionObject.inspectionWorkTrackingConditions.selection"
+                     class="item">
+                  <span ng-bind="::reports.inspectionWorkTrackingConditions.data[sectionObject.inspectionWorkTrackingConditions.selection].name"></span>
+                </div>
+                <div ng-if="::sectionObject.complyChoice"
+                     class="item">
+                  <span ng-bind="::sectionObject.complyChoice"></span>
+                </div>
+                <div ng-if="::sectionObject.comments"
+                     class="item">
+                  <div class="list card no-margin">
+                    <div class="item item-divider">
+                      Comments
+                    </div>
+                    <div ng-repeat="comment in ::sectionObject.comments"
+                         class="item">
+                      <div>
+                        <p class="report-comment" ng-bind="comment.text"></p>
+                      </div>
+                    </div>
                   </div>
                 </div>
+                <div ng-if="::sectionObject.images"
+                     class="item">
+                  <div class="list card no-margin">
+                    <!--<div class="item item-divider"
+                         ng-click="reports.toggleImageSection(roomID, sectionID, sectionObject.images)">-->
+                    <div class="item item-divider">
+                      <button disabled>
+                        <i class="icon"
+                           ng-class="!reports.showImages[roomID][sectionID] ? 'ion-plus' : 'ion-minus'">
+                        </i>
+                      </button>
+                      Images
+                    </div>
+                    <div ng-if="reports.showImages[roomID][sectionID]">
+                      <div ng-repeat="(attachmentID, picObj) in reports.visibleImages.data[roomID][sectionID]">
+                        <div class="item">
+                          <img ng-src="{{::picObj.src}}"
+                               class="image-thumbnail-report">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div ng-if="::sectionObject.videos"
+                     class="item">
+                  Has videos
+                </div>
               </div>
-            </div>
-            <div ng-if="::sectionObject.images"
-                 class="item">
-              Has images
-            </div>
-            <div ng-if="::sectionObject.videos"
-                 class="item">
-              Has videos
             </div>
           </div>
         </div>
