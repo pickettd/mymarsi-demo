@@ -149,9 +149,9 @@
       </div>
       <div ng-if="reports.showByRoom"
            class="item">
-        <div ng-repeat="(roomID, roomObject) in ::reports.fullInspection.data"
+        <div ng-repeat="roomID in ::reports.selectedTemplate.roomOrder"
              class="list card no-margin"
-             ng-if="::roomID !== 'Inventory'">
+             ng-if="::(roomID !== 'Inventory' && reports.fullInspection.data[roomID])">
           <div class="item item-divider"
                ng-click="reports.hideRoom[roomID] = !reports.hideRoom[roomID]">
             <button>
@@ -167,7 +167,7 @@
           </div>
           <div ng-if="!reports.hideRoom[roomID]"
                class="item">
-            <div ng-repeat="(sectionID, sectionObject) in ::roomObject.data"
+            <div ng-repeat="(sectionID, sectionObject) in ::reports.fullInspection.data[roomID].data"
                  class="list card no-margin"
                  ng-attr-id="{{sectionID}}">
               <div class="item item-divider"
