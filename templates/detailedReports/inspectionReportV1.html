@@ -31,10 +31,8 @@
   </div>
   <div class="item">
     <button class="button button-dark" ng-click="reports.defaultPrintView()">Default print view (no images)</button>
-    <!--<button class="button button-calm" ng-click="reports.closeAllImageSections()">-->
-    <button disabled class="button button-calm" ng-click="">Hide all images</button>
-    <!--<button class="button button-positive" ng-click="reports.openAllImageSections()">-->
-    <button disabled class="button button-calm" ng-click="">Show all images</button>
+    <button class="button button-calm" ng-click="reports.closeAllImageSections()">Hide all images</button>
+    <button class="button button-positive" ng-click="reports.openAllImageSections()">Show all images</button>
   </div>
   <div class="item">
     <div class="list card no-margin">
@@ -255,10 +253,9 @@
                 <div ng-if="::sectionObject.images"
                      class="item">
                   <div class="list card no-margin">
-                    <!--<div class="item item-divider"
-                         ng-click="reports.toggleImageSection(roomID, sectionID, sectionObject.images)">-->
-                    <div class="item item-divider">
-                      <button disabled>
+                    <div class="item item-divider"
+                         ng-click="reports.toggleImageSection(roomID, sectionID, sectionObject.images)">
+                      <button>
                         <i class="icon"
                            ng-class="!reports.showImages[roomID][sectionID] ? 'ion-plus' : 'ion-minus'">
                         </i>
@@ -268,7 +265,8 @@
                     <div ng-if="reports.showImages[roomID][sectionID]">
                       <div ng-repeat="(attachmentID, picObj) in reports.visibleImages.data[roomID][sectionID]">
                         <div class="item">
-                          <img ng-src="{{::picObj.src}}"
+                          <img img-fix-orientation="::picObj.src"
+                               ng-src="{{::picObj.src}}"
                                class="image-thumbnail-report">
                         </div>
                       </div>
