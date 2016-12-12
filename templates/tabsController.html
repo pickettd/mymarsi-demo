@@ -2,54 +2,72 @@
     <ion-tabs class="tabs-stable tabs-icon-top">
         <ion-tab ng-if="tabs.selectedTemplate.data['GENERAL']"
                  title="General"
+                 badge="isThisTabSelected('GENERAL')"
+                 on-select="selectThisTab('GENERAL')"
                  icon="ion-earth"
                  href="#/rooms/general">
             <ion-nav-view name="tab13"></ion-nav-view>
         </ion-tab>
         <ion-tab ng-if="tabs.selectedTemplate.data['ENTRY/HALLWAY']"
                  title="Entry / Hallway"
+                 badge="isThisTabSelected('ENTRY/HALLWAY')"
+                 on-select="selectThisTab('ENTRY/HALLWAY')"
                  icon="ion-paintbucket"
                  href="#/rooms/entryHallway">
             <ion-nav-view name="tab2"></ion-nav-view>
         </ion-tab>
         <ion-tab ng-if="tabs.selectedTemplate.data['LANAI']"
                  title="Lanai"
+                 badge="isThisTabSelected('LANAI')"
+                 on-select="selectThisTab('LANAI')"
                  icon="ion-android-sunny"
                  href="#/rooms/lanai">
             <ion-nav-view name="tab12"></ion-nav-view>
         </ion-tab>
         <ion-tab ng-if="tabs.selectedTemplate.data['KITCHEN']"
                  title="Kitchen"
+                 badge="isThisTabSelected('KITCHEN')"
+                 on-select="selectThisTab('KITCHEN')"
                  icon="ion-fork"
                  href="#/rooms/kitchen">
             <ion-nav-view name="tab3"></ion-nav-view>
         </ion-tab>
         <ion-tab ng-if="tabs.selectedTemplate.data['LIVING ROOM']"
                  title="Living Room"
+                 badge="isThisTabSelected('LIVING ROOM')"
+                 on-select="selectThisTab('LIVING ROOM')"
                  icon="ion-easel"
                  href="#/rooms/livingRoom">
             <ion-nav-view name="tab4"></ion-nav-view>
         </ion-tab>
         <ion-tab ng-if="tabs.selectedTemplate.data['DINING ROOM']"
                  title="Dining Room"
+                 badge="isThisTabSelected('DINING ROOM')"
+                 on-select="selectThisTab('DINING ROOM')"
                  icon="ion-wineglass"
                  href="#/rooms/diningRoom">
             <ion-nav-view name="tab5"></ion-nav-view>
         </ion-tab>
         <ion-tab ng-if="tabs.selectedTemplate.data['MASTER BATHROOM']"
                  title="Master Bathroom"
+                 badge="isThisTabSelected('MASTER BATHROOM')"
+                 on-select="selectThisTab('MASTER BATHROOM')"
                  icon="ion-waterdrop"
                  href="#/rooms/masterBathroom">
             <ion-nav-view name="tab6"></ion-nav-view>
         </ion-tab>
         <ion-tab ng-if="tabs.selectedTemplate.data['BATHROOM #1']"
                  title="Bathroom #1"
+                 badge="isThisTabSelected('BATHROOM #1')"
+                 on-select="selectThisTab('BATHROOM #1')"
                  icon="ion-waterdrop"
                  href="#/rooms/bathroom1">
             <ion-nav-view name="tab16"></ion-nav-view>
         </ion-tab>
         <ion-tab ng-if="tabs.selectedTemplate.data['BATHROOM #2']"
                  title="Bathroom #2"
+                 badge="isThisTabSelected('BATHROOM #2')"
+                 on-select="selectThisTab('BATHROOM #2')"
                  icon="ion-waterdrop"
                  href="#/rooms/bathroom2">
             <ion-nav-view name="tab17"></ion-nav-view>
@@ -59,18 +77,24 @@
         </ion-tab>-->
         <ion-tab ng-if="tabs.selectedTemplate.data['MASTER BEDROOM']"
                  title="Master Bedroom"
+                 badge="isThisTabSelected('MASTER BEDROOM')"
+                 on-select="selectThisTab('MASTER BEDROOM')"
                  icon="ion-home"
                  href="#/rooms/masterBedroom">
             <ion-nav-view name="tab8"></ion-nav-view>
         </ion-tab>
         <ion-tab ng-if="tabs.selectedTemplate.data['BEDROOM #1']"
                  title="Bedroom #1"
+                 badge="isThisTabSelected('BEDROOM #1')"
+                 on-select="selectThisTab('BEDROOM #1')"
                  icon="ion-home"
                  href="#/rooms/bedroom1">
             <ion-nav-view name="tab18"></ion-nav-view>
         </ion-tab>
         <ion-tab ng-if="tabs.selectedTemplate.data['BEDROOM #2']"
                  title="Bedroom #2"
+                 badge="isThisTabSelected('BEDROOM #2')"
+                 on-select="selectThisTab('BEDROOM #2')"
                  icon="ion-home"
                  href="#/rooms/bedroom2">
             <ion-nav-view name="tab19"></ion-nav-view>
@@ -80,6 +104,8 @@
         </ion-tab>-->
         <ion-tab ng-if="tabs.selectedTemplate.data['Inventory']"
                  title="Inventory"
+                 badge="isThisTabSelected('Inventory')"
+                 on-select="selectThisTab('Inventory')"
                  icon="ion-hammer"
                  href="#/rooms/inventory">
             <ion-nav-view name="tab1"></ion-nav-view>
@@ -93,6 +119,8 @@
         </ion-tab>-->
         <ion-tab ng-if="tabs.selectedTemplate.data['FACTS']"
                  title="Facts"
+                 badge="isThisTabSelected('FACTS')"
+                 on-select="selectThisTab('FACTS')"
                  icon="ion-clipboard"
                  href="#/rooms/facts">
             <ion-nav-view name="tab11"></ion-nav-view>

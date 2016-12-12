@@ -22,14 +22,18 @@
     <div class="list card">
       <div class="item item-divider">Edit Pictures</div>
         <div class="item item-body">
-          <ion-list show-delete="true">
+          <ion-list>
             <ion-item ng-repeat="image in rooms[rooms.selectedRoomID][rooms[rooms.selectedRoomID].modalSection].images track by image._id">
-              <img img-fix-orientation="::image.src"
+              <!--<img img-fix-orientation="::image.src"
                    ng-src="{{::image.src}}"
                    class="image-thumbnail-modal">
               <ion-delete-button class="ion-trash-a"
                        ng-click="rooms[rooms.selectedRoomID].deleteImage(image._id)">
-              </ion-delete-button>
+              </ion-delete-button>-->
+
+              <a ng-href="{{image.link}}" target="_blank">
+                <span ng-bind="image.fullPath"></span>
+              </a>
             </ion-item>
           </ion-list>
         </div>

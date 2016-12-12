@@ -263,11 +263,14 @@
                       Images
                     </div>
                     <div ng-if="reports.showImages[roomID][sectionID]">
-                      <div ng-repeat="(attachmentID, picObj) in reports.visibleImages.data[roomID][sectionID]">
+                      <div ng-repeat="(imageID, image) in reports.visibleImages.data[roomID][sectionID]">
                         <div class="item">
-                          <img img-fix-orientation="::picObj.src"
+                          <!--<img img-fix-orientation="::picObj.src"
                                ng-src="{{::picObj.src}}"
-                               class="image-thumbnail-report">
+                               class="image-thumbnail-report">-->
+                          <a ng-href="{{image.link}}" target="_blank">
+                            <span ng-bind="image.fullPath"></span>
+                          </a>
                         </div>
                       </div>
                     </div>
