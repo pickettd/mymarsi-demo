@@ -99,11 +99,13 @@
     </div>
     <div class="item">
       Hospitality rating (1-10): {{section.hospitalityRating}}
-      <div class="range range-positive">
-        <i class="icon ion-ios-sunny-outline"></i>
-        <input type="range" class="range" min="0" max="10" step="1" value="5"
-               ng-model="section.hospitalityRating" />
-        <i class="icon ion-ios-sunny"></i>
+      <div class="button-bar">
+        <a ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+           class="button button-outline"
+           ng-class="{'button-dark': (section.hospitalityRating === i)}"
+           ng-click="section.hospitalityRating = i">
+          {{::i}}
+        </a>
       </div>
     </div>
     <div class="item">
