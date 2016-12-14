@@ -23,7 +23,7 @@
       <div class="item item-divider">Edit Pictures</div>
         <div class="item item-body">
           <ion-list>
-            <ion-item ng-repeat="image in rooms[rooms.selectedRoomID][rooms[rooms.selectedRoomID].modalSection].images track by image._id">
+            <ion-item ng-repeat="image in rooms[rooms.selectedRoomID].sections[rooms[rooms.selectedRoomID].modalSection].images track by image._id">
               <!--<img img-fix-orientation="::image.src"
                    ng-src="{{::image.src}}"
                    class="image-thumbnail-modal">

@@ -24,7 +24,7 @@
           class="icon ion-checkmark-circled"></span>
     <span ng-if="!section.markSectionComplete"
           style="padding-left: 10px;"
-          ng-click="rooms.markSectionNA(section); $event.stopPropagation();">
+          ng-click="rooms.markSectionNA(section, true); $event.stopPropagation();">
       <input type="checkbox"
              ng-click="$event.preventDefault();"
              ng-model="section.naChoice">
@@ -103,7 +103,7 @@
         <a ng-repeat="i in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
            class="button button-outline"
            ng-class="{'button-dark': (section.hospitalityRating === i)}"
-           ng-click="section.hospitalityRating = i">
+           ng-click="rooms.setSectionProperty(section, 'hospitalityRating', i)">
           {{::i}}
         </a>
       </div>
@@ -118,21 +118,21 @@
                     ng-if="trackingCondition.name"
                     class="button button-block"
                     ng-class="{active: section.inspectionWorkTrackingConditions.selection == trackingCondition._id,'button-outline-active': section.inspectionWorkTrackingConditions.selection == trackingCondition._id,'button-{{trackingCondition['button-class']}}': trackingCondition['button-class']}"
-                    ng-click="section.inspectionWorkTrackingConditions.selection = trackingCondition._id"
+                    ng-click="rooms.setTimelineSelection(section, trackingCondition._id)"
                     style="white-space: normal;">
               <span>{{::trackingCondition.name}}</span>
             </button>
           </div>
           <form class="list">
             <label class="item item-input">
-              <ion-checkbox ng-click="section.complyChoice = '100% complies now'"
+              <ion-checkbox ng-click="rooms.setSectionProperty(section, 'complyChoice', '100% complies now')"
                             ng-checked="section.complyChoice == '100% complies now'"
                             class="no-border">
                 <span>
                   100% complies now
                 </span>
               </ion-checkbox>
-              <ion-checkbox ng-click="section.complyChoice = 'Doesn\'t comply now'"
+              <ion-checkbox ng-click="rooms.setSectionProperty(section, 'complyChoice', 'Doesn\'t comply now')"
                             ng-checked="section.complyChoice == 'Doesn\'t comply now'"
                             class="no-border">
                 <span>
@@ -141,14 +141,14 @@
               </ion-checkbox>
             </label>
             <label class="item item-input">
-              <ion-checkbox ng-click="section.complyChoice = 'Not 100% now but will comply'"
+              <ion-checkbox ng-click="rooms.setSectionProperty(section, 'complyChoice', 'Not 100% now but will comply')"
                             ng-checked="section.complyChoice == 'Not 100% now but will comply'"
                             class="no-border">
                 <span>
                   Not 100% now but will comply
                 </span>
               </ion-checkbox>
-              <ion-checkbox ng-click="section.complyChoice = 'Will not comply'"
+              <ion-checkbox ng-click="rooms.setSectionProperty(section, 'complyChoice', 'Will not comply')"
                             ng-checked="section.complyChoice == 'Will not comply'"
                             class="no-border">
                 <span>

@@ -22,12 +22,9 @@
     <div class="list card">
       <div class="item item-divider">Edit Comments</div>
         <div class="item item-body">
-          <ion-list show-delete="true">
+          <ion-list>
             <ion-item ng-repeat="comment in rooms[rooms.selectedRoomID].sections[rooms[rooms.selectedRoomID].modalSection].comments track by comment._id">
               <p ng-bind="comment.text"></p>
-              <ion-delete-button class="ion-trash-a"
-                       ng-click="rooms[rooms.selectedRoomID].deleteComment(comment._id)">
-              </ion-delete-button>
             </ion-item>
           </ion-list>
         </div>

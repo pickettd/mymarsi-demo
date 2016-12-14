@@ -10,7 +10,8 @@
       </span>
       <span ng-if="!option.isLabel">
         <ion-checkbox ng-if="option.hasCheckbox"
-                      ng-model="condition[option.optionID].checkboxValue"
+                      ng-click="rooms.setTypeConditionDetail(section, typeID, option.optionID, 'checkboxValue',condition[option.optionID].checkboxValue)"
+                      ng-checked="condition[option.optionID].checkboxValue"
                       class="no-border"
                       ng-style="{'no-right-padding': option.hasText}">
           <span ng-if="!option.hasText"
@@ -26,7 +27,8 @@
           </span>
           <input type="text"
                  placeholder="Type here"
-                 ng-model="condition[option.optionID].textValue">
+                 ng-model="condition[option.optionID].textValue"
+                 ng-blur="rooms.setTypeConditionDetail(section, typeID, option.optionID, 'textValue',condition[option.optionID].textValue)">
         </label>
       </span>
     </span>
