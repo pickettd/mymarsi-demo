@@ -1,4 +1,4 @@
-<div ng-if="reports.selectedInspection && reports.fullReportReady">
+<div ng-if="reports.selectedInspection && reports.fullReportReady && (reports.fullInspection._id === reports.selectedInspection._id)">
   <div class="item">
     Hospitality average:
     {{reports.sumOfHospitalityPoints / reports.countOfHospitalityDataPoints | number}}

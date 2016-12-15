@@ -89,16 +89,25 @@
                 Inspection
               </div>
               <select ng-options="inspection as inspection.name for inspection in reports.inspectionStubs track by inspection._id"
-                      ng-model="reports.selectedInspection"
-                      ng-change="reports.getVisitStubs(reports.selectedInspection._id)">
+                      ng-model="reports.selectedInspection">
               </select>
             </label>
           </div>
         </div>
       </div>
       <div ng-if="reports.selectedInspection">
-        <a ng-click="reports.getReportInspection(reports.selectedInspection._id)"
+        <a ng-if="reports.fullReportReady && (reports.fullInspection._id !== reports.selectedInspection._id)"
+           ng-click="reports.getReportInspection(reports.selectedInspection._id)"
            class="button button-balanced button-block">View all inspection data</a>
+        <a ng-if="!reports.fullReportReady"
+           class="button button-balanced button-block">
+          <ion-spinner></ion-spinner>
+        </a>
+        <a ng-if="reports.fullReportReady && (reports.fullInspection._id === reports.selectedInspection._id)"
+           class="button button-balanced button-block"
+           disabled>
+          Report Ready
+        </a>
       </div>
       <!--<div class="item item-divider"
            ng-if="reports.selectedInspection && !reports.fullReportReady">
